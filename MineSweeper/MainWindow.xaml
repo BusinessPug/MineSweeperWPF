@@ -1,0 +1,67 @@
+﻿<Window x:Class="MineSweeper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        MinWidth="200"
+        MinHeight="200"
+        Title="MineSweeper"
+        WindowStartupLocation="CenterScreen"
+        Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=(Background)}"
+        WindowState="Maximized">
+
+    <Window.Resources>
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Color Theme" Name="ThemeSelection">
+                    <MenuItem Header="_Main" Name="Main" Click="ThemeSelection_Click"/>
+                    <MenuItem Header="_Grey" Name="Grey" Click="ThemeSelection_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Grid Size" Name="GridSizeSelection">
+                    <MenuItem Header="_8x8" Name="Small" Click="GridSizeSelection_Click"/>
+                    <MenuItem Header="_16x16" Name="Medium" Click="GridSizeSelection_Click"/>
+                    <MenuItem Header="_24x24" Name="Large" Click="GridSizeSelection_Click"/>
+                    <Separator/>
+                    <MenuItem Header="_Custom..." Name="Custom" Click="GridSizeSelection_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Sound" Name="Sound">
+                    <MenuItem Header="_On" Name="On" Click="Sound_Click"/>
+                    <MenuItem Header="_Off" Name="Off" Click="Sound_Click"/>
+                </MenuItem>
+            </Menu>
+
+            <!-- Minefield grid -->
+            <Viewbox DockPanel.Dock="Bottom">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <!-- Auto-adjust row height -->
+                        <RowDefinition Height="*" />
+                        <!-- Auto-adjust row height -->
+                    </Grid.RowDefinitions>
+                    <UniformGrid Background="Transparent" x:Name="PATH_DataGrid"/>
+                </Grid>
+            </Viewbox>
+        </DockPanel>
+    </Grid>
+</Window>
